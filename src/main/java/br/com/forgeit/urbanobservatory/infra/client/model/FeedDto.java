@@ -3,10 +3,11 @@ package br.com.forgeit.urbanobservatory.infra.client.model;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.List;
+
 @Data
 @ToString
-public class Latest {
-    private String time;
-    private Double duration;
-    private Integer value;
+public class FeedDto {
+    private String metric;
+    private List<TimeSerieDto> timeseries;
 }

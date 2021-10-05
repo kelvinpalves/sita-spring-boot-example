@@ -8,11 +8,11 @@ import java.util.Map;
 
 @Data
 @ToString
-public class Entity {
+public class EntityDto {
 
     private String entityId;
     private String name;
     private Map<String, String> meta;
-    private List<Feed> feed;
+    private List<FeedDto> feed;
 
 }

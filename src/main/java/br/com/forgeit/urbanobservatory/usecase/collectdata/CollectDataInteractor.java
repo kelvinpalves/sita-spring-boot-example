@@ -1,12 +1,12 @@
 package br.com.forgeit.urbanobservatory.usecase.collectdata;
 
 import br.com.forgeit.urbanobservatory.infra.client.DataCollectorClient;
+import br.com.forgeit.urbanobservatory.infra.client.DataCollectorDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -18,8 +18,13 @@ public class CollectDataInteractor implements CollectDataInputBoundary {
 
     @Override
     public void execute() {
-        log.info("Collecting data from: {}", rooms.getConfigurations());
+        log.info("use case collect data was called");
+        rooms.getConfigurations().stream().forEach(this::register);
+    }
 
-        rooms.getConfigurations().stream().forEach(room -> collectorClient.getLatest(room.getEntityID()));
+    private void register(Rooms.Room room) {
+        Optional<DataCollectorDto> dataCollectorDtoOptional = collectorClient.getLatest(room.getEntityID());
+
+        log.info(dataCollectorDtoOptional);
     }
 }

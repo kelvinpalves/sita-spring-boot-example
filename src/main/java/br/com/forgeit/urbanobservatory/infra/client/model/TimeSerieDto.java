@@ -7,7 +7,7 @@ import java.util.Map;
 
 @Data
 @ToString
-public class TimeSerie {
+public class TimeSerieDto {
     private Map<String, String> unit;
-    private Latest latest;
+    private LatestDto latest;
 }

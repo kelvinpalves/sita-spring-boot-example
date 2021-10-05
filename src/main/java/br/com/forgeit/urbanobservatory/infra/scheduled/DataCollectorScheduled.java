@@ -13,7 +13,7 @@ public class DataCollectorScheduled {
 
     private final CollectDataInputBoundary collectData;
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 60000)
     public void getData() {
         log.info("collecting data from urban repository");
         collectData.execute();

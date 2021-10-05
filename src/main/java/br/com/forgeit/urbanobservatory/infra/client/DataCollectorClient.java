@@ -2,9 +2,11 @@ package br.com.forgeit.urbanobservatory.infra.client;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public interface DataCollectorClient {
 
-    DataCollectorDto getLatest(String id);
+    Optional<DataCollectorDto> getLatest(String id);
 
 }
