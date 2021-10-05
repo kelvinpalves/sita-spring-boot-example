@@ -1,0 +1,12 @@
+rooms:
+  configurations:
+    -
+      name: "6030"
+      entityID: "91b6cc36-f7dd-474c-8437-65c1ddf37aaa"
+    -
+      name: "6011"
+      entityID: "b83645c5-e253-41f9-ac63-99168a4e9a64"
+
+config:
+  dataCollector:
+    url: "https://api.usb.urbanobservatory.ac.uk/api/v2/sensors/entity/"
