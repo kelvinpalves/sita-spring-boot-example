@@ -5,6 +5,7 @@ import br.com.forgeit.urbanobservatory.infra.client.model.FeedDto;
 import br.com.forgeit.urbanobservatory.infra.client.model.LatestDto;
 import br.com.forgeit.urbanobservatory.infra.client.model.TimeSerieDto;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @Builder
 @ToString
 @Log4j2
+@Getter
 public class DataCollectorDto {
 
     private final String entityID;

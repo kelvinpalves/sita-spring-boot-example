@@ -31,24 +31,20 @@ public class RestTemplateDataCollectorClient implements DataCollectorClient {
         String fullUrl = getFullUrl(id);
         ResponseEntity<EntityDto> response = restTemplate.getForEntity(fullUrl, EntityDto.class);
 
-        if (response.getStatusCode().equals(HttpStatus.OK)) {
-            log.info("Entity: {}", response.getBody());
-            DataCollectorDto dataCollectorDto = DataCollectorDto.createFromEntityDto(response.getBody());
-            System.out.println(dataCollectorDto);
-            List<FeedDto> feedList = response.getBody().getFeed();
+        if (!response.getStatusCode().equals(HttpStatus.OK))
+            return Optional.empty();
 
-            for (FeedDto feedDto : feedList) {
-                if (metrics.getAllowed().contains(feedDto.getMetric())) {
-                    dataCollectorDto.addMetric(feedDto);
-                } else {
-                    log.warn("Metric: {} will not be collected.", feedDto.getMetric());
-                }
-            }
+        log.info("Entity: {}", response.getBody());
+        DataCollectorDto dataCollectorDto = DataCollectorDto.createFromEntityDto(response.getBody());
+        List<FeedDto> feedList = response.getBody().getFeed();
 
-            return Optional.of(dataCollectorDto);
+        for (FeedDto feedDto : feedList) {
+            if (metrics.getAllowed().contains(feedDto.getMetric()))
+                dataCollectorDto.addMetric(feedDto);
         }
 
-        return Optional.empty();
+        return Optional.of(dataCollectorDto);
+
     }
 
     private String getFullUrl(String id) {
