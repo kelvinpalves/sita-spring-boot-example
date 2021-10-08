@@ -1,6 +1,6 @@
-package br.com.forgeit.urbanobservatory.domain;
+package br.com.forgeit.sita.domain;
 
-import br.com.forgeit.urbanobservatory.common.exception.InvalidSitaConfigurationException;
+import br.com.forgeit.exception.InvalidSitaConfigurationException;
 
 public enum SitaLevelEnum {
 
@@ -34,6 +34,6 @@ public enum SitaLevelEnum {
             }
         }
 
-        throw new InvalidSitaConfigurationException("Invalid: " + levelStr + "");
+        throw new InvalidSitaConfigurationException("You must inform the level between 0 and 4. Invalid: " + levelStr + "");
     }
 }

@@ -1,6 +1,6 @@
-package br.com.forgeit.urbanobservatory.infra.rest;
+package br.com.forgeit.sita.infra.rest;
 
-import br.com.forgeit.urbanobservatory.usecase.registerconfig.RegisterSitaConfigurationInputBoundary;
+import br.com.forgeit.sita.usecase.registerconfig.RegisterSitaConfigurationInputBoundary;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class SitaConfigurationController {
     private final RegisterSitaConfigurationInputBoundary inputBoundary;
 
     @GetMapping("/set-sita/{config}")
-    public SitaConfigurationResponseDto setSitaConfig(@PathVariable String config) {
+    public SetSitaResponseDto setSitaConfig(@PathVariable String config) {
         return inputBoundary.setSitaConfig(config);
     }
 }

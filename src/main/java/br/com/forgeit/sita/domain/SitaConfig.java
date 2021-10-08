@@ -1,6 +1,6 @@
-package br.com.forgeit.urbanobservatory.domain;
+package br.com.forgeit.sita.domain;
 
-import br.com.forgeit.urbanobservatory.common.exception.InvalidSitaConfigurationException;
+import br.com.forgeit.exception.InvalidSitaConfigurationException;
 import lombok.Getter;
 import lombok.ToString;
 

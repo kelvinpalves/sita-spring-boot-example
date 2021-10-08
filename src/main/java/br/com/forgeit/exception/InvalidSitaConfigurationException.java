@@ -1,4 +1,4 @@
-package br.com.forgeit.urbanobservatory.common.exception;
+package br.com.forgeit.exception;
 
 public class InvalidSitaConfigurationException extends Exception {
 

@@ -1,4 +1,4 @@
-package br.com.forgeit.urbanobservatory;
+package br.com.forgeit;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
