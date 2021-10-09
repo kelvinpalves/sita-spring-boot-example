@@ -1,5 +1,6 @@
 package br.com.forgeit.sita.infra.repository;
 
+import br.com.forgeit.sita.usecase.getconfig.GetSitaConfigDto;
 import br.com.forgeit.sita.usecase.registerconfig.SetSitaDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -27,6 +28,12 @@ public class JpaSitaConfiguration implements SitaConfigurationDataSourceGateway 
             log.error(ex);
             throw new Exception("Error to save SITA configuration on database.");
         }
+    }
+
+    @Override
+    public GetSitaConfigDto getSitaConfig() {
+        return GetSitaConfigDto
+                .sitaConfigurationDataMapperToGetSitaConfigDto(jpaSitaConfigurationRepository.getById(ID_CONFIG));
     }
 
 }

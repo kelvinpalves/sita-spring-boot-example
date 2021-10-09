@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Log4j2
 @RequiredArgsConstructor
-@RequestMapping("admin/")
+@RequestMapping("admin/sita-manager/")
 public class SitaConfigurationController {
 
     private final RegisterSitaConfigurationInputBoundary inputBoundary;
