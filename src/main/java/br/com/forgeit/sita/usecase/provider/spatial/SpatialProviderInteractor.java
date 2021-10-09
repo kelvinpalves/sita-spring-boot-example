@@ -35,3 +35,4 @@ public class SpatialProviderInteractor implements SpatialProviderInputBoundary {
         throw new Exception("Invalid handler");
     }
 }
+

@@ -1,15 +1,15 @@
-package br.com.forgeit.sita.usecase.provider.spatial.handlers;
+package br.com.forgeit.sita.usecase.provider.temporal.handlers;
 
 import br.com.forgeit.sita.domain.SitaLevelEnum;
-import br.com.forgeit.sita.usecase.datacenter.IdentityDataDto;
 import br.com.forgeit.sita.usecase.datacenter.SpatialDataDto;
+import br.com.forgeit.sita.usecase.datacenter.TemporalDataDto;
 import br.com.forgeit.sita.usecase.strategy.StrategyHandler;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SpatialFullInformationStrategy implements StrategyHandler<SpatialDataDto> {
+public class TemporalFullInformationStrategy implements StrategyHandler<TemporalDataDto> {
     @Override
-    public SpatialDataDto execute(SpatialDataDto dto) {
+    public TemporalDataDto execute(TemporalDataDto dto) {
         return dto;
     }
 
