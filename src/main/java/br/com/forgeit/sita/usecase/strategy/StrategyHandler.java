@@ -1,6 +1,5 @@
 package br.com.forgeit.sita.usecase.strategy;
 
-import br.com.forgeit.sita.domain.SitaGroupEnum;
 import br.com.forgeit.sita.domain.SitaLevelEnum;
 import org.springframework.stereotype.Component;
 
@@ -12,3 +11,4 @@ public interface StrategyHandler<T> {
     SitaLevelEnum getSitaLevelEnum();
 
 }
+

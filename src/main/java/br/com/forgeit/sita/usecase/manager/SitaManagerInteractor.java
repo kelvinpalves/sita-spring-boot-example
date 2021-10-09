@@ -1,15 +1,11 @@
 package br.com.forgeit.sita.usecase.manager;
 
-import br.com.forgeit.exception.InvalidSitaConfigurationException;
 import br.com.forgeit.sita.domain.SitaLevelEnum;
-import br.com.forgeit.sita.usecase.datacenter.ActivityDataDto;
-import br.com.forgeit.sita.usecase.datacenter.DataCenterInputBoundary;
-import br.com.forgeit.sita.usecase.datacenter.GroupedDataDto;
-import br.com.forgeit.sita.usecase.datacenter.MetricGroupedData;
+import br.com.forgeit.sita.usecase.datacenter.*;
 import br.com.forgeit.sita.usecase.getconfig.GetSitaConfigDto;
 import br.com.forgeit.sita.usecase.getconfig.GetSitaConfigInputBoundary;
 import br.com.forgeit.sita.usecase.provider.activity.ActivityProviderInputBoundary;
-import br.com.forgeit.urbanobservatory.usecase.getdata.GetDataInputBoundary;
+import br.com.forgeit.sita.usecase.provider.identity.IdentityProviderInputBoundary;
 import br.com.forgeit.urbanobservatory.usecase.getdata.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -26,6 +22,7 @@ public class SitaManagerInteractor implements SitaManagerInputBoundary {
     private final GetSitaConfigInputBoundary getSitaConfig;
     private final DataCenterInputBoundary dataCenter;
     private final ActivityProviderInputBoundary activityProviderInputBoundary;
+    private final IdentityProviderInputBoundary identityProviderInputBoundary;
 
     @Override
     public List<ResponseDto> applyRules(List<ResponseDto> originalDataList) {
@@ -46,9 +43,15 @@ public class SitaManagerInteractor implements SitaManagerInputBoundary {
             convertedDataList.forEach(log::info);
 
             SitaLevelEnum activityLevel = SitaLevelEnum.getLevelEnum(sitaConfigDto.getActivityDataLevel().toString());
+            SitaLevelEnum identityLevel = SitaLevelEnum.getLevelEnum(sitaConfigDto.getIdentityDataLevel().toString());
 
             for (int i = 0; i < convertedDataList.size(); i++) {
                 List<MetricGroupedData> metrics = convertedDataList.get(i).getMetricsGroupedData();
+                GroupedDataDto groupedDataDto = convertedDataList.get(i);
+                IdentityDataDto identityDataDto = groupedDataDto.getIdentityDataDto();
+                identityDataDto = identityProviderInputBoundary.convert(identityLevel, identityDataDto);
+                groupedDataDto.setIdentityDataDto(identityDataDto);
+                convertedDataList.get(i).setIdentityDataDto(identityDataDto);
 
                 for (int j = 0; j < metrics.size(); j++) {
                     ActivityDataDto dto = metrics.get(j).getActivityDataDto();

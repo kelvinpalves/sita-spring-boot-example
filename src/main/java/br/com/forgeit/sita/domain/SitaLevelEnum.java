@@ -1,6 +1,6 @@
 package br.com.forgeit.sita.domain;
 
-import br.com.forgeit.exception.InvalidSitaConfigurationException;
+import br.com.forgeit.sita.exception.InvalidSitaConfigurationException;
 
 public enum SitaLevelEnum {
 

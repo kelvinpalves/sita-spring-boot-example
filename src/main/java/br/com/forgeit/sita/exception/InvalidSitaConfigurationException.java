@@ -1,4 +1,4 @@
-package br.com.forgeit.exception;
+package br.com.forgeit.sita.exception;
 
 public class InvalidSitaConfigurationException extends Exception {
 

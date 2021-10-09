@@ -1,13 +1,14 @@
 package br.com.forgeit.sita.usecase.datacenter;
 
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.ToString;
 
 import java.util.List;
 
+
 @Builder
-@Getter
+@Data
 @ToString
 public class GroupedDataDto {
     private SpatialDataDto spatialDataDto;

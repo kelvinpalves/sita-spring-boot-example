@@ -11,7 +11,7 @@ public class ActivityNoInformationStrategy implements StrategyHandler<ActivityDa
     public ActivityDataDto execute(ActivityDataDto dto) {
         return ActivityDataDto.builder()
                 .unit("")
-                .value(dto.getValue())
+                .value("")
                 .build();
     }
 

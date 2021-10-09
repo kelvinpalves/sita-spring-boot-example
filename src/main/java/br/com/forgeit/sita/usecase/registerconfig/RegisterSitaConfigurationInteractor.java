@@ -1,6 +1,6 @@
 package br.com.forgeit.sita.usecase.registerconfig;
 
-import br.com.forgeit.exception.InvalidSitaConfigurationException;
+import br.com.forgeit.sita.exception.InvalidSitaConfigurationException;
 import br.com.forgeit.sita.domain.SitaConfig;
 import br.com.forgeit.sita.domain.SitaLevelEnum;
 import br.com.forgeit.sita.infra.repository.SitaConfigurationDataSourceGateway;
