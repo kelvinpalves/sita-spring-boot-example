@@ -3,7 +3,9 @@ package br.com.forgeit.sita.usecase.provider.identity.handlers;
 import br.com.forgeit.sita.domain.SitaLevelEnum;
 import br.com.forgeit.sita.usecase.datacenter.IdentityDataDto;
 import br.com.forgeit.sita.usecase.strategy.StrategyHandler;
+import org.springframework.stereotype.Component;
 
+@Component
 public class IdentityNoInformationStrategy implements StrategyHandler<IdentityDataDto> {
 
     @Override

@@ -4,7 +4,9 @@ import br.com.forgeit.sita.domain.SitaLevelEnum;
 import br.com.forgeit.sita.usecase.datacenter.SpatialDataDto;
 import br.com.forgeit.sita.usecase.datacenter.TemporalDataDto;
 import br.com.forgeit.sita.usecase.strategy.StrategyHandler;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TemporalNoInformationStrategy implements StrategyHandler<TemporalDataDto> {
 
     @Override

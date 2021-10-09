@@ -4,7 +4,9 @@ import br.com.forgeit.sita.domain.SitaLevelEnum;
 import br.com.forgeit.sita.usecase.datacenter.IdentityDataDto;
 import br.com.forgeit.sita.usecase.datacenter.SpatialDataDto;
 import br.com.forgeit.sita.usecase.strategy.StrategyHandler;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SpatialNoInformationStrategy implements StrategyHandler<SpatialDataDto> {
 
     @Override

@@ -14,6 +14,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -43,31 +44,21 @@ public class SitaManagerInteractor implements SitaManagerInputBoundary {
             SitaLevelEnum spatialLevel = SitaLevelEnum.getLevelEnum(sitaConfigDto.getSpatialDataLevel().toString());
             SitaLevelEnum temporalLevel = SitaLevelEnum.getLevelEnum(sitaConfigDto.getTemporalDataLevel().toString());
 
-            for (int i = 0; i < convertedDataList.size(); i++) {
-                List<MetricGroupedData> metrics = convertedDataList.get(i).getMetricsGroupedData();
-                GroupedDataDto groupedDataDto = convertedDataList.get(i);
-                IdentityDataDto identityDataDto = groupedDataDto.getIdentityDataDto();
-                identityDataDto = identityProviderInputBoundary.convert(identityLevel, identityDataDto);
-                convertedDataList.get(i).setIdentityDataDto(identityDataDto);
+            for (GroupedDataDto groupedDataDto : convertedDataList) {
+                List<MetricGroupedData> metrics = groupedDataDto.getMetricsGroupedData();
+                groupedDataDto.setIdentityDataDto(identityProviderInputBoundary.convert(identityLevel, groupedDataDto.getIdentityDataDto()));
+                groupedDataDto.setSpatialDataDto(spatialProviderInputBoundary.convert(spatialLevel, groupedDataDto.getSpatialDataDto()));
 
-                SpatialDataDto spatialDataDto = groupedDataDto.getSpatialDataDto();
-                spatialDataDto = spatialProviderInputBoundary.convert(spatialLevel, spatialDataDto);
-                convertedDataList.get(i).setSpatialDataDto(spatialDataDto);
-
-                for (int j = 0; j < metrics.size(); j++) {
-                    ActivityDataDto dto = metrics.get(j).getActivityDataDto();
-                    TemporalDataDto temporalDataDto = metrics.get(j).getTemporalDataDto();
-                    dto = activityProviderInputBoundary.convert(activityLevel, dto);
-                    temporalDataDto = temporalProviderInputBoundary.convert(temporalLevel, temporalDataDto);
-                    metrics.get(j).setActivityDataDto(dto);
-                    metrics.get(j).setTemporalDataDto(temporalDataDto);
+                for (MetricGroupedData metric : metrics) {
+                    metric.setActivityDataDto(activityProviderInputBoundary.convert(activityLevel, metric.getActivityDataDto()));
+                    metric.setTemporalDataDto(temporalProviderInputBoundary.convert(temporalLevel, metric.getTemporalDataDto()));
                 }
             }
 
             return ResponseDto.getFinalData(convertedDataList);
         } catch (Exception ex) {
             log.error(ex);
-            return null;
+            return Collections.emptyList();
         }
     }
 }
