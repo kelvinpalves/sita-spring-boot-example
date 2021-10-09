@@ -6,6 +6,7 @@ import br.com.forgeit.sita.usecase.getconfig.GetSitaConfigDto;
 import br.com.forgeit.sita.usecase.getconfig.GetSitaConfigInputBoundary;
 import br.com.forgeit.sita.usecase.provider.activity.ActivityProviderInputBoundary;
 import br.com.forgeit.sita.usecase.provider.identity.IdentityProviderInputBoundary;
+import br.com.forgeit.sita.usecase.provider.spatial.SpatialProviderInputBoundary;
 import br.com.forgeit.urbanobservatory.usecase.getdata.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,6 +24,7 @@ public class SitaManagerInteractor implements SitaManagerInputBoundary {
     private final DataCenterInputBoundary dataCenter;
     private final ActivityProviderInputBoundary activityProviderInputBoundary;
     private final IdentityProviderInputBoundary identityProviderInputBoundary;
+    private final SpatialProviderInputBoundary spatialProviderInputBoundary;
 
     @Override
     public List<ResponseDto> applyRules(List<ResponseDto> originalDataList) {
@@ -44,14 +46,18 @@ public class SitaManagerInteractor implements SitaManagerInputBoundary {
 
             SitaLevelEnum activityLevel = SitaLevelEnum.getLevelEnum(sitaConfigDto.getActivityDataLevel().toString());
             SitaLevelEnum identityLevel = SitaLevelEnum.getLevelEnum(sitaConfigDto.getIdentityDataLevel().toString());
+            SitaLevelEnum spatialLevel = SitaLevelEnum.getLevelEnum(sitaConfigDto.getSpatialDataLevel().toString());
 
             for (int i = 0; i < convertedDataList.size(); i++) {
                 List<MetricGroupedData> metrics = convertedDataList.get(i).getMetricsGroupedData();
                 GroupedDataDto groupedDataDto = convertedDataList.get(i);
                 IdentityDataDto identityDataDto = groupedDataDto.getIdentityDataDto();
                 identityDataDto = identityProviderInputBoundary.convert(identityLevel, identityDataDto);
-                groupedDataDto.setIdentityDataDto(identityDataDto);
                 convertedDataList.get(i).setIdentityDataDto(identityDataDto);
+
+                SpatialDataDto spatialDataDto = groupedDataDto.getSpatialDataDto();
+                spatialDataDto = spatialProviderInputBoundary.convert(spatialLevel, spatialDataDto);
+                convertedDataList.get(i).setSpatialDataDto(spatialDataDto);
 
                 for (int j = 0; j < metrics.size(); j++) {
                     ActivityDataDto dto = metrics.get(j).getActivityDataDto();
