@@ -1,6 +1,6 @@
 package br.com.forgeit.urbanobservatory.usecase.getdata;
 
-import br.com.forgeit.urbanobservatory.infra.repository.MetricsDataSourceGateway;
+import br.com.forgeit.urbanobservatory.infra.datasource.MetricsDataSourceGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

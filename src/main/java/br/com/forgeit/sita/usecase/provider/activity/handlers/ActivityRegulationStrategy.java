@@ -23,7 +23,7 @@ public class ActivityRegulationStrategy implements StrategyHandler<ActivityDataD
     }
 
     public String getUnit(String unit) {
-        return regulationList.contains(unit) ? "wheater" : unit;
+        return regulationList.contains(unit) ? "weather" : unit;
     }
 
     @Override

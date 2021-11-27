@@ -1,5 +1,12 @@
-package br.com.forgeit.urbanobservatory.infra.repository;
+package br.com.forgeit.urbanobservatory.infra.repository.jpa;
 
+import br.com.forgeit.urbanobservatory.domain.mapper.RoomMapper;
+import br.com.forgeit.urbanobservatory.domain.model.Room;
+import br.com.forgeit.urbanobservatory.infra.datasource.EntityDataSourceGateway;
+import br.com.forgeit.urbanobservatory.infra.datasource.MetricsDataSourceGateway;
+import br.com.forgeit.urbanobservatory.infra.exception.EntityAlreadyExistsException;
+import br.com.forgeit.urbanobservatory.infra.repository.model.MetricDataMapper;
+import br.com.forgeit.urbanobservatory.infra.repository.model.RoomDataMapper;
 import br.com.forgeit.urbanobservatory.usecase.collectdata.MetricsDto;
 import br.com.forgeit.urbanobservatory.usecase.collectdata.RegisterMetricsDto;
 import br.com.forgeit.urbanobservatory.usecase.getdata.ResponseDto;
@@ -18,10 +25,11 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 @Log4j2
-public class JpaMetrics implements MetricsDataSourceGateway {
+public class JpaMetrics implements MetricsDataSourceGateway, EntityDataSourceGateway {
 
     private final JpaMetricsRepository metricsRepository;
     private final JpaRoomRepository roomRepository;
+    private final RoomMapper roomMapper;
 
     @Override
     @Transactional
@@ -83,5 +91,16 @@ public class JpaMetrics implements MetricsDataSourceGateway {
         metricDataMapper.setValue(metric.getValue());
         metricsRepository.saveAndFlush(metricDataMapper);
         log.info("metric created: {}", metricDataMapper);
+    }
+
+    @Override
+    public Room createRoom(Room newRoomRequest) throws EntityAlreadyExistsException {
+        if (roomRepository.findById(newRoomRequest.getEntityId()).isPresent()) {
+            throw new EntityAlreadyExistsException(String.format("The entity with ID '%s' already exists!", newRoomRequest.getEntityId()));
+        }
+
+        RoomDataMapper roomDataMapper = roomMapper.roomToRoomDataMapper(newRoomRequest);
+        roomDataMapper.setCreatedAt(LocalDateTime.now());
+        return roomMapper.roomDataMapperToRoom(roomRepository.save(roomDataMapper));
     }
 }

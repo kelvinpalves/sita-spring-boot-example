@@ -1,7 +1,6 @@
-package br.com.forgeit.urbanobservatory.infra.repository;
+package br.com.forgeit.urbanobservatory.infra.repository.model;
 
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;

@@ -1,7 +1,7 @@
 package br.com.forgeit.urbanobservatory.usecase.collectdata;
 
-import br.com.forgeit.urbanobservatory.domain.Room;
-import br.com.forgeit.urbanobservatory.domain.Sensor;
+import br.com.forgeit.urbanobservatory.domain.model.Room;
+import br.com.forgeit.urbanobservatory.domain.model.Sensor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;

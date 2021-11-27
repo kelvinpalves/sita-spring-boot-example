@@ -1,4 +1,4 @@
-package br.com.forgeit.urbanobservatory.domain;
+package br.com.forgeit.urbanobservatory.domain.model;
 
 import lombok.Getter;
 import lombok.ToString;

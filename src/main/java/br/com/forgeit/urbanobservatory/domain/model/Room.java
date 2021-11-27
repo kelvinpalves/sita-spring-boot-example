@@ -1,19 +1,16 @@
-package br.com.forgeit.urbanobservatory.domain;
+package br.com.forgeit.urbanobservatory.domain.model;
 
 import br.com.forgeit.urbanobservatory.infra.client.DataCollectorDto;
 import br.com.forgeit.urbanobservatory.infra.client.MetricDto;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
 
-import java.time.DateTimeException;
-import java.time.format.DateTimeParseException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Builder
-@Getter
-@ToString
+@Data
 public class Room {
 
     private String entityId;
@@ -21,6 +18,7 @@ public class Room {
     private String building;
     private Integer buildingFloor;
     private String roomNumber;
+    private LocalDateTime createdAt;
     private final List<Sensor> sensors = new ArrayList<>();
 
     public void addSensor(Sensor sensor) {

@@ -1,4 +1,4 @@
-package br.com.forgeit.urbanobservatory.infra.repository;
+package br.com.forgeit.urbanobservatory.infra.repository.model;
 
 
 import lombok.Builder;

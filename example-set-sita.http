@@ -1,0 +1,23 @@
+###
+GET http://localhost:8080/admin/sita-manager/set-sita/0000
+###
+GET http://localhost:8080/admin/sita-manager/set-sita/1111
+###
+GET http://localhost:8080/admin/sita-manager/set-sita/2222
+###
+GET http://localhost:8080/admin/sita-manager/set-sita/3333
+###
+GET http://localhost:8080/admin/sita-manager/set-sita/4444
+###
+GET http://localhost:8080/admin/sita-manager/get-data
+###
+POST http://localhost:8080/admin/entity
+Content-Type: application/json
+
+{
+  "id": "test-insert-new-room",
+  "building": "Urban Sciences Building",
+  "floor": 7,
+  "name": "Urban Sciences Building: Floor 7: Room 1515",
+  "roomNumber": "1.515"
+}
